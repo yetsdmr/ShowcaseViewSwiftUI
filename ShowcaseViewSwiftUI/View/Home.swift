@@ -42,6 +42,12 @@ struct Home: View {
                                         .fill(.black)
                                     }
                             }
+                            .showCase(
+                                order: 0,
+                                title: "My Current Location",
+                                cornerRadius: 10,
+                                style: .continuous
+                            )
                             
                             Spacer (minLength: 0)
                             
@@ -57,6 +63,12 @@ struct Home: View {
                                         .fill(.red)
                                     }
                             }
+                            .showCase(
+                                order: 1,
+                                title: "Favourite Location's",
+                                cornerRadius: 10,
+                                style: .continuous
+                            )
 
                         }
                         .padding (15)
@@ -64,24 +76,70 @@ struct Home: View {
             }
             .tabItem {
                 Image(systemName: "macbook.and.iphone")
-                Text ("Devices")
+                Text("Devices")
             }
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarBackground(.ultraThinMaterial, for: .tabBar)
             
-            Text ("")
+            Text("")
                 .tabItem {
                     Image(systemName: "square.grid.2x2.fill")
                     Text("Items")
                 }
             
            
-            Text ("")
+            Text("")
                 .tabItem {
                     Image(systemName: "person.circle.fill")
                     Text("Me")
                 }
         }
+        .overlay(alignment: .bottom, content: {
+            HStack(spacing: 0) {
+                Circle()
+                    .foregroundColor(.clear)
+                    .frame(width: 45, height: 45)
+                    .frame(maxWidth: .infinity)
+                    .showCase(
+                        order: 2,
+                        title: "My Current Location",
+                        cornerRadius: 10,
+                        style: .continuous
+                    )
+                    .frame(maxWidth: .infinity)
+                
+                
+                Circle()
+                    .foregroundColor(.clear)
+                    .frame(width: 45, height: 45)
+                    .frame(maxWidth: .infinity)
+                    .showCase(
+                        order: 4,
+                        title: "Location Enabled Tag's",
+                        cornerRadius: 10,
+                        style: .continuous
+                    )
+                    .frame(maxWidth: .infinity)
+                
+                Circle()
+                    .foregroundColor(.clear)
+                    .frame(width: 45, height: 45)
+                    .frame(maxWidth: .infinity)
+                    .showCase(
+                        order: 3,
+                        title: "Personal Info",
+                        cornerRadius: 10,
+                        style: .continuous
+                    )
+                    .frame(maxWidth: .infinity)
+            }
+            // Disabling User Interactions
+            .allowsHitTesting(false)
+        })
+        // Call this Modifier on the top of the current View, also it must be called once
+        .modifier(ShowCaseRoot(showHighlights: true, onFinished: {
+            print("Finished OnBoarding")
+        }))
 
     }
 }
